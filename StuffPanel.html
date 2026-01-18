@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Панель администратора</title>
+    <link rel="stylesheet" href="CSS/StuffPanel.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link type="image/png" href="img/icon.png" rel="icon">
+</head>
+<body>
+    <main class="dashboard">
+        <div class="left-column">
+            <section class="dashboard__panel dashboard__panel--left" aria-label="Панель навигации">
+                <h1 class="dashboard__title">Панель администратора</h1>
+                
+                <nav class="admin-navigation" aria-label="Навигация по панели администратора">
+                    <button class="tab-button active" data-tab="users" aria-label="Перейти к списку пользователей">
+                        <i class="fas fa-users"></i>
+                        <span>Пользователи</span>
+                        <span class="badge" id="usersCount">0</span>
+                    </button>
+                    <button class="tab-button" data-tab="reports" aria-label="Перейти к репортам">
+                        <i class="fas fa-flag"></i>
+                        <span>Репорты</span>
+                        <span class="badge badge-warning" id="reportsCount">0</span>
+                    </button>
+                    <button class="tab-button" data-tab="statistics" aria-label="Перейти к статистике">
+                        <i class="fas fa-chart-bar"></i>
+                        <span>Статистика</span>
+                    </button>
+                    <button class="tab-button" data-tab="logs" aria-label="Перейти к логам">
+                        <i class="fas fa-clipboard-list"></i>
+                        <span>Логи системы</span>
+                    </button>
+                </nav>
+                
+                <div class="admin-stats">
+                    <h2 class="admin-stats__title">Общая статистика</h2>
+                    <div class="admin-stats__grid">
+                        <div class="admin-stats__card">
+                            <div class="admin-stats__icon">
+                                <i class="fas fa-user-friends"></i>
+                            </div>
+                            <div class="admin-stats__info">
+                                <span class="admin-stats__label">Всего пользователей</span>
+                                <span class="admin-stats__value" id="totalUsers">0</span>
+                            </div>
+                        </div>
+                        <div class="admin-stats__card">
+                            <div class="admin-stats__icon">
+                                <i class="fas fa-user-clock"></i>
+                            </div>
+                            <div class="admin-stats__info">
+                                <span class="admin-stats__label">Активных сегодня</span>
+                                <span class="admin-stats__value" id="activeToday">0</span>
+                            </div>
+                        </div>
+                        <div class="admin-stats__card">
+                            <div class="admin-stats__icon">
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </div>
+                            <div class="admin-stats__info">
+                                <span class="admin-stats__label">Новых репортов</span>
+                                <span class="admin-stats__value" id="newReports">0</span>
+                            </div>
+                        </div>
+                        <div class="admin-stats__card">
+                            <div class="admin-stats__icon">
+                                <i class="fas fa-user-slash"></i>
+                            </div>
+                            <div class="admin-stats__info">
+                                <span class="admin-stats__label">Заблокировано</span>
+                                <span class="admin-stats__value" id="blockedUsers">0</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <div class="buttons-container">
+                <button class="button button--primary" type="button" aria-label="Экспортировать данные" id="exportData">
+                    <i class="fas fa-download"></i>
+                    Экспорт данных
+                </button>
+                <button class="button button--secondary" type="button" aria-label="Вернуться в дашборд" id="backToMain">
+                    <i class="fas fa-arrow-left"></i>
+                    Назад в дашборд
+                </button>
+            </div>
+        </div>
+
+        <section class="dashboard__panel dashboard__panel--main" aria-label="Основная панель контента">
+            <div class="tab-content active" id="usersTab">
+                <div class="tab-header">
+                    <h2 class="tab-title">Управление пользователями</h2>
+                    <div class="tab-actions">
+                        <div class="search-box">
+                            <i class="fas fa-search"></i>
+                            <input type="text" id="userSearch" placeholder="Поиск пользователей..." aria-label="Поиск пользователей">
+                        </div>
+                        <button class="button button--small" id="addUserBtn">
+                            <i class="fas fa-user-plus"></i>
+                            Добавить
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="table-container">
+                    <table class="admin-table" aria-label="Таблица пользователей">
+                        <thead>
+                            <tr>
+                                <th><input type="checkbox" id="selectAllUsers" aria-label="Выбрать всех пользователей"></th>
+                                <th>ID</th>
+                                <th>Имя пользователя</th>
+                                <th>Email</th>
+                                <th>Дата регистрации</th>
+                                <th>Статус</th>
+                                <th>Роль</th>
+                                <th>Действия</th>
+                            </tr>
+                        </thead>
+                        <tbody id="usersTableBody">
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="table-footer">
+                    <div class="pagination-info">
+                        Показано <span id="shownUsers">0</span> из <span id="totalUsersCount">0</span> пользователей
+                    </div>
+                    <div class="pagination">
+                        <button class="pagination-btn" disabled>
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <span class="pagination-page">1</span>
+                        <button class="pagination-btn">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="reportsTab">
+                <div class="tab-header">
+                    <h2 class="tab-title">Репорты пользователей</h2>
+                    <div class="tab-actions">
+                        <div class="filter-dropdown">
+                            <select id="reportFilter" aria-label="Фильтр репортов">
+                                <option value="all">Все репорты</option>
+                                <option value="pending">В ожидании</option>
+                                <option value="in_progress">В обработке</option>
+                                <option value="resolved">Решено</option>
+                                <option value="rejected">Отклонено</option>
+                            </select>
+                        </div>
+                        <button class="button button--small" id="refreshReports">
+                            <i class="fas fa-sync-alt"></i>
+                            Обновить
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="table-container">
+                    <table class="admin-table" aria-label="Таблица репортов">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Тип</th>
+                                <th>Пользователь</th>
+                                <th>Цель</th>
+                                <th>Дата</th>
+                                <th>Статус</th>
+                                <th>Приоритет</th>
+                                <th>Действия</th>
+                            </tr>
+                        </thead>
+                        <tbody id="reportsTableBody">
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="table-footer">
+                    <div class="pagination-info">
+                        Показано <span id="shownReports">0</span> из <span id="totalReportsCount">0</span> репортов
+                    </div>
+                    <div class="pagination">
+                        <button class="pagination-btn" disabled>
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <span class="pagination-page">1</span>
+                        <button class="pagination-btn">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="statisticsTab">
+                <div class="tab-header">
+                    <h2 class="tab-title">Статистика системы</h2>
+                    <div class="tab-actions">
+                        <div class="period-selector">
+                            <select id="statsPeriod" aria-label="Период статистики">
+                                <option value="7">Последние 7 дней</option>
+                                <option value="30" selected>Последние 30 дней</option>
+                                <option value="90">Последние 90 дней</option>
+                                <option value="365">Последний год</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="stats-grid">
+                    <div class="chart-container">
+                        <h3 class="chart-title">Регистрации пользователей</h3>
+                        <canvas id="registrationsChart" aria-label="График регистраций пользователей"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <h3 class="chart-title">Активность по дням недели</h3>
+                        <canvas id="activityChart" aria-label="График активности по дням недели"></canvas>
+                    </div>
+                    <div class="stats-card-large">
+                        <h3 class="chart-title">Распределение по ролям</h3>
+                        <div class="roles-distribution" id="rolesDistribution">
+                        </div>
+                    </div>
+                    <div class="stats-card-large">
+                        <h3 class="chart-title">Топ действий</h3>
+                        <div class="top-actions" id="topActions">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="logsTab">
+                <div class="tab-header">
+                    <h2 class="tab-title">Логи системы</h2>
+                    <div class="tab-actions">
+                        <div class="log-filter">
+                            <select id="logLevel" aria-label="Уровень логов">
+                                <option value="all">Все уровни</option>
+                                <option value="info">Информация</option>
+                                <option value="warning">Предупреждения</option>
+                                <option value="error">Ошибки</option>
+                                <option value="critical">Критические</option>
+                            </select>
+                            <input type="date" id="logDate" aria-label="Дата логов">
+                        </div>
+                        <button class="button button--small" id="clearLogs">
+                            <i class="fas fa-trash"></i>
+                            Очистить логи
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="logs-container" id="logsContainer">
+                </div>
+                
+                <div class="table-footer">
+                    <div class="pagination-info">
+                        Показано <span id="shownLogs">50</span> последних записей
+                    </div>
+                    <button class="button button--small" id="loadMoreLogs">
+                        <i class="fas fa-plus"></i>
+                        Загрузить больше
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <aside class="dashboard__panel dashboard__panel--right" aria-label="Панель быстрых действий">
+            <div class="quick-actions">
+                <h2 class="panel-title">Быстрые действия</h2>
+                <button class="quick-action-btn" id="banUserBtn">
+                    <i class="fas fa-ban"></i>
+                    Заблокировать пользователя
+                </button>
+                <button class="quick-action-btn" id="changeRoleBtn">
+                    <i class="fas fa-user-tag"></i>
+                    Изменить роль
+                </button>
+                <button class="quick-action-btn" id="viewReportBtn">
+                    <i class="fas fa-eye"></i>
+                    Просмотр репорта
+                </button>
+                <button class="quick-action-btn" id="sendNotificationBtn">
+                    <i class="fas fa-bell"></i>
+                    Отправить уведомление
+                </button>
+            </div>
+            
+            <div class="system-info">
+                <h2 class="panel-title">Информация о системе</h2>
+                <div class="info-item">
+                    <span class="info-label">Версия системы:</span>
+                    <span class="info-value">1.0</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Последнее обновление:</span>
+                    <span class="info-value" id="lastUpdate">13.12.2025</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Статус базы данных:</span>
+                    <span class="info-value status-active">Активна</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Использование памяти:</span>
+                    <span class="info-value" id="memoryUsage">65%</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Время работы:</span>
+                    <span class="info-value" id="uptime">7д 14ч</span>
+                </div>
+            </div>
+            
+            <button class="button button--logout" type="button" aria-label="Выйти из панели администратора" id="logoutAdmin">
+                <i class="fas fa-sign-out-alt"></i>
+                Выйти
+            </button>
+        </aside>
+    </main>
+    
+    <div class="modal" id="userDetailsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Детали пользователя</h2>
+                <button class="modal-close" aria-label="Закрыть модальное окно">&times;</button>
+            </div>
+            <div class="modal-body" id="userDetailsContent">
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal" id="reportDetailsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Детали репорта</h2>
+                <button class="modal-close" aria-label="Закрыть модальное окно">&times;</button>
+            </div>
+            <div class="modal-body" id="reportDetailsContent">
+            </div>
+            <div class="modal-footer">
+                <button class="button button--small" id="markResolvedBtn">Отметить как решено</button>
+                <button class="button button--small button--warning" id="markRejectedBtn">Отклонить</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="editRoleModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Изменить роль пользователя</h2>
+                <button class="modal-close" aria-label="Закрыть модальное окно">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="editRoleForm">
+                    <input type="hidden" id="editRoleUserId">
+                    <div class="modal-form-group">
+                        <label for="editRoleSelect">Выберите роль:</label>
+                        <select id="editRoleSelect" class="modal-form-control modal-form-select" required>
+                            <option value="user">Пользователь</option>
+                            <option value="admin">Администратор</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="modal-submit-btn">Сохранить изменения</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="bulkActionModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="bulkActionTitle">Массовые действия</h2>
+                <button class="modal-close" aria-label="Закрыть модальное окно">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p id="bulkActionMessage">Вы уверены, что хотите выполнить это действие для выбранных пользователей?</p>
+                <div class="modal-footer" style="margin-top: 20px; display: flex; gap: 10px; justify-content: flex-end;">
+                    <button class="button button--small" id="bulkActionCancel">Отмена</button>
+                    <button class="button button--small button--warning" id="bulkActionConfirm">Подтвердить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="module" src="JS/StuffPanel.js"></script>
+</body>
+</html>
+
+
+

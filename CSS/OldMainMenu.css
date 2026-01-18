@@ -1,0 +1,550 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: "Comfortaa";
+  src: url("https://fonts.gstatic.com/s/comfortaa/v45/1Pt_g8LJRfWJmhDAuUsSQamb1W0lwk4S4WjMDr4fIA9c.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: "Comfortaa", Arial, sans-serif;
+  background: linear-gradient(252deg, rgba(0, 0, 0, 1) 22%, rgba(60, 59, 105, 1) 100%);
+}
+
+button:focus-visible {
+  outline: 2px solid #4a90e2 !important;
+  outline-offset: 2px;
+}
+
+a {
+  text-decoration: none;
+}
+
+.dashboard {
+  min-height: 100vh;
+  padding: 35px 20px;
+  display: grid;
+  grid-template-columns: minmax(300px, 587px) minmax(500px, 900px) minmax(250px, 314px);
+  grid-template-rows: auto 1fr auto;
+  gap: 30px;
+  align-items: start;
+  max-width: 1920px;
+  margin: 0 auto;
+}
+
+/* Левая колонка - содержит панель и кнопки под ней */
+.left-column {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+/* Общие стили панелей */
+.dashboard__panel {
+  border-radius: 50px;
+  background: linear-gradient(251deg, rgba(42, 42, 42, 1) 0%, rgba(73, 72, 125, 1) 100%);
+  padding: 30px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Левая панель */
+.dashboard__panel--left {
+  flex: 1;
+  display: flex;
+  max-height: 676px;
+  overflow: auto;
+  flex-direction: column;
+  min-height: 676px;
+  scrollbar-width: none;
+}
+
+.dashboard__panel--left::-webkit-scrollbar {
+  width: 6px;
+}
+
+.dashboard__panel--left::-webkit-scrollbar-track {
+  background: #1a1a1a;
+  border-radius: 3px;
+}
+
+.dashboard__panel--left::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #555, #333);
+  border-radius: 3px;
+  border: 1px solid #444;
+}
+
+.dashboard__panel--left::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #666, #444);
+}
+
+/* Основная панель */
+.dashboard__panel--main {
+  grid-column: 2;
+  grid-row: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 676px;
+}
+
+/* Правая панель */
+.dashboard__panel--right {
+  grid-column: 3;
+  grid-row: 1 / span 3;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-height: 877px;
+}
+
+/* Контейнер статистики под основной панелью */
+.stats-container {
+  grid-column: 2;
+  justify-content: space-around;
+  grid-row: 2;
+  display: flex;
+  gap: 20px;
+  border-radius: 50px;
+  background: linear-gradient(251deg, rgba(42, 42, 42, 1) 0%, rgba(73, 72, 125, 1) 100%);
+  padding: 30px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Заголовок */
+.dashboard__title {
+  font-family: "Comfortaa", sans-serif;
+  font-weight: 400;
+  color: #ffffff;
+  font-size: 48px;
+  text-align: center;
+  margin-bottom: 30px;
+  letter-spacing: 0;
+  line-height: 1.2;
+}
+
+/* Кнопки */
+.button {
+  font-family: "Comfortaa", sans-serif;
+  font-weight: 400;
+  border: none;
+  border-radius: 50px;
+  background: linear-gradient(251deg, rgba(42, 42, 42, 1) 0%, rgba(73, 72, 125, 1) 100%);
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+.button:active {
+  transform: translateY(0);
+}
+
+.button--primary {
+  font-size: 20px;
+  height: 104px;
+  width: 100%;
+}
+
+.button--secondary {
+  font-size: 24px;
+  height: 92px;
+  width: 100%;
+  border: 1px solid #bfbfbf;
+}
+
+.button--export {
+  font-size: 24px;
+  height: 72px;
+  width: 100%;
+  margin-top: auto;
+}
+
+/* Карточки статистики */
+.stats-card {
+  background: linear-gradient(251deg, rgba(42, 42, 42, 1) 0%, rgba(73, 72, 125, 1) 100%);
+  border-radius: 50px;
+  padding: 20px 30px;
+  margin-bottom: 20px;
+  text-align: center;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
+}
+
+.stats-card__title {
+  font-family: "Comfortaa", sans-serif;
+  color: #ffffff;
+  font-size: 24px;
+  margin-bottom: 8px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.2;
+}
+
+.stats-card__value {
+  font-family: "Comfortaa", sans-serif;
+  color: #959595;
+  font-size: 20px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.2;
+}
+
+.stats-card__value--total {
+  color: #ffffff;
+  font-size: 24px;
+}
+
+/* Навигация */
+.navigation {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+/* Область диаграммы */
+.chart-area {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  min-height: 400px;
+  position: relative;
+}
+
+.chart-area canvas {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+/* Контейнер для кнопок под левой панелью */
+.buttons-container {
+  display: flex;
+  flex-direction: flex;
+  gap: 20px;
+  border-radius: 50px;
+  background: linear-gradient(251deg, rgba(42, 42, 42, 1) 0%, rgba(73, 72, 125, 1) 100%);
+  padding: 30px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.stats-container .stats-card {
+  margin-bottom: 0;
+}
+
+/* Контент внутри левой панели */
+.panel-content {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 18px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+/* Контейнер для транзакций */
+.transactions-overlay {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 10px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(102, 126, 234, 0.5) rgba(0, 0, 0, 0.1);
+}
+
+.transactions-overlay::-webkit-scrollbar {
+  width: 8px;
+}
+
+.transactions-overlay::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.transactions-overlay::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, rgba(102, 126, 234, 0.8), rgba(118, 75, 162, 0.8));
+  border-radius: 10px;
+  border: 2px solid rgba(0, 0, 0, 0.1);
+}
+
+.transactions-overlay::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, rgba(102, 126, 234, 1), rgba(118, 75, 162, 1));
+}
+
+.transaction-card {
+  position: relative;
+  width: 100%;
+  max-width: 537px;
+  height: 203px;
+  flex-shrink: 0;
+}
+
+.card-1 {
+  z-index: 3;
+}
+
+.card-2 {
+  z-index: 2;
+}
+
+.card-3 {
+  z-index: 1;
+}
+
+.card-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #181818;
+  border-radius: 45px;
+  z-index: 1;
+}
+
+.card-background::after {
+  content: '';
+  position: absolute;
+  top: 77px;
+  left: 15px;
+  width: calc(100% - 30px);
+  height: 110px;
+  background-color: #000000;
+  border-radius: 31px;
+}
+
+.card-content {
+  position: relative;
+  z-index: 2;
+  padding: 29px 31px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.transaction-type {
+  color: #ffffff;
+  font-size: 20px;
+  letter-spacing: -0.6px;
+  font-family: 'Arial', sans-serif;
+  font-weight: 400;
+  line-height: 1;
+  margin-bottom: auto;
+}
+
+.transaction-details {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.currency-icon {
+  width: 81px;
+  height: 81px;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+.amount-section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-left: auto;
+}
+
+.amount {
+  color: #ffffff;
+  font-size: 36px;
+  letter-spacing: -1.08px;
+  font-family: 'Arial', sans-serif;
+  font-weight: 400;
+  line-height: 1;
+  margin-bottom: 5px;
+}
+
+.currency {
+  font-family: 'Arial', sans-serif;
+  font-weight: 400;
+  color: #5d5d5d;
+  font-size: 14px;
+  letter-spacing: -0.42px;
+  line-height: 1;
+}
+
+.transaction-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.transaction-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* Адаптивность */
+@media (max-width: 1440px) {
+  .dashboard {
+    grid-template-columns: minmax(250px, 1fr) minmax(400px, 2fr) minmax(200px, 1fr);
+    gap: 20px;
+    padding: 30px 15px;
+  }
+  
+  .dashboard__title {
+    font-size: 36px;
+  }
+  
+  .button--primary {
+    font-size: 28px;
+    height: 90px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .dashboard {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    gap: 20px;
+  }
+  
+  .left-column {
+    grid-column: 1;
+    grid-row: auto;
+    order: 2;
+  }
+  
+  .dashboard__panel--main {
+    grid-column: 1;
+    grid-row: auto;
+    order: 1;
+  }
+  
+  .stats-container {
+    grid-column: 1;
+    grid-row: auto;
+    order: 3;
+  }
+  
+  .dashboard__panel--right {
+    grid-column: 1;
+    grid-row: auto;
+    order: 4;
+  }
+  
+  .navigation {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  
+  .navigation .button {
+    flex: 1;
+    min-width: 200px;
+  }
+  
+  .stats-container {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .buttons-container {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  
+  .buttons-container .button {
+    flex: 1;
+    min-width: 200px;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard {
+    padding: 20px 10px;
+    gap: 15px;
+  }
+  
+  .dashboard__panel {
+    padding: 20px;
+    border-radius: 30px;
+  }
+  
+  .dashboard__title {
+    font-size: 28px;
+    margin-bottom: 20px;
+  }
+  
+  .button--primary {
+    font-size: 24px;
+    height: 80px;
+  }
+  
+  .button--secondary {
+    font-size: 20px;
+    height: 80px;
+  }
+  
+  .stats-card {
+    padding: 15px 20px;
+    border-radius: 30px;
+  }
+  
+  .stats-card__title {
+    font-size: 20px;
+  }
+  
+  .stats-card__value {
+    font-size: 18px;
+  }
+  
+  .navigation {
+    flex-direction: column;
+  }
+  
+  .buttons-container {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard__title {
+    font-size: 24px;
+  }
+  
+  .button--primary {
+    font-size: 20px;
+    height: 70px;
+  }
+  
+  .stats-card__title {
+    font-size: 18px;
+  }
+  
+  .stats-card__value {
+    font-size: 16px;
+  }
+}

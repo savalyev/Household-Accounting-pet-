@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Регистрация | Создание аккаунта</title>
+    <meta name="description" content="Страница регистрации нового пользователя.">
+    <link rel="stylesheet" href="CSS/globals.css">
+    <link rel="stylesheet" href="CSS/Registration2.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link type="image/png" href="img/icon.png" rel="icon">
+</head>
+<body class="page-enter">
+    <div id="notificationContainer"></div>
+    <main class="screen">
+        <div class="container">
+            <div class="main-block">
+                <div class="image-section" aria-hidden="true">
+                    <img 
+                        class="image" 
+                        src="img/image-24.png" 
+                        alt="Декоративное изображение для страницы регистрации"
+                        loading="lazy"
+                        width="641"
+                        height="742">
+                </div>
+
+                <div class="form-section">
+                    <header class="form-header">
+                        <h1 class="form-title">Создание аккаунта</h1>
+                        <div class="divider" role="separator"></div>
+                    </header>
+
+                    <form id="registerForm" class="login-form" action="/register" method="post" novalidate>
+                        <input type="hidden" name="_csrf" value="">
+
+                        <div class="form-group">
+                            <label for="name" class="form-label">
+                                Имя <span class="required">*</span>
+                            </label>
+                            <input
+                                type="text"
+                                id="name"
+                                name="name"
+                                class="form-input"
+                                required
+                                aria-required="true"
+                                autocomplete="name"
+                                placeholder="Как к вам обращаться">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email" class="form-label">
+                                Электронная почта <span class="required">*</span>
+                            </label>
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                class="form-input"
+                                required
+                                aria-required="true"
+                                autocomplete="email"
+                                placeholder="example@email.com">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password" class="form-label">
+                                Пароль <span class="required">*</span>
+                            </label>
+                            <div class="password-wrapper">
+                                <input 
+                                    type="password"
+                                    id="password"
+                                    name="password"
+                                    class="form-input"
+                                    required
+                                    aria-required="true"
+                                    autocomplete="new-password"
+                                    placeholder="Минимум 6 символов">
+                                <button type="button" class="toggle-password" data-target="#password" aria-label="Показать пароль" aria-pressed="false">
+                                    👁
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="confirm-password" class="form-label">
+                                Подтвердите пароль <span class="required">*</span>
+                            </label>
+                            <div class="password-wrapper">
+                                <input 
+                                    type="password"
+                                    id="confirm-password"
+                                    name="confirm-password"
+                                    class="form-input"
+                                    required
+                                    aria-required="true"
+                                    autocomplete="new-password"
+                                    placeholder="Повторите пароль">
+                                <button type="button" class="toggle-password" data-target="#confirm-password" aria-label="Показать пароль" aria-pressed="false">
+                                    👁
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="error-message" role="alert" aria-live="polite" hidden></div>
+
+                        <button type="submit" class="submit-button" aria-label="Создать аккаунт">
+                            <span class="button-text">Создать аккаунт</span>
+                        </button>
+
+                        <div class="form-footer">
+                            <a href="Authorization2.html" class="register-link">
+                                <span>У меня уже есть аккаунт</span>
+                                <span class="arrow" aria-hidden="true">→</span>
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="JS/app.js"></script>
+</body>
+</html>
+
+
+

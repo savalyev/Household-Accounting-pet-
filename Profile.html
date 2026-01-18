@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="utf-8" />
+    <title>Finance - Профиль пользователя</title>
+    <link rel="stylesheet" href="CSS/Profile.css" />
+    <link rel="stylesheet" href="CSS/modal.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link type="image/png" href="img/icon.png" rel="icon">
+</head>
+<body>
+    <main class="screen">
+
+        <div class="main-container">
+            <section class="header-section">
+                <div class="header-background"></div>
+                <h1 class="greeting" id="greeting">Добро пожаловать!</h1>
+                <button class="back-button" type="button" aria-label="Вернуться назад" id="backButton">
+                    <img class="back-icon" src="img/image-9.png" alt="" />
+                </button>
+            </section>
+
+            <section class="profile-grid">
+                <div class="profile-card">
+                    <div class="profile-content">
+                        <div class="avatar-container">
+                            <div class="avatarka">
+                                <img class="avatar-image" id="avatarImage" src="img/image-10.png" alt="Аватар" />
+                                <input type="file" id="avatarInput" accept="image/*" style="display: none;" />
+                                <button type="button" class="avatar-upload-btn" id="avatarUploadBtn" title="Загрузить аватар">
+                                    <i class="fas fa-camera"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="profile-form">
+                            <div class="form-group">
+                                <form id="emailForm">
+                                    <div class="input-mail">
+                                        <div class="input-background"></div>
+                                        <img class="input-icon" src="img/ImageEmail.png" alt="" />
+                                        <input
+                                            type="email"
+                                            class="email-input"
+                                            id="emailInput"
+                                            placeholder="user@example.com"
+                                            aria-label="Электронная почта"
+                                            required
+                                        />
+                                        <img class="line" src="img/line-2.png" alt="" />
+                                    </div>
+                                    <div style="display: flex; gap: 8px; margin-top: 10px;">
+                                        <button class="button button--secondary" type="submit" aria-label="Сменить почту" style="flex: 1;">
+                                            <span class="button-text">Сменить почту</span>
+                                        </button>
+                                        <button class="button button--secondary" type="button" id="verifyEmailBtn" aria-label="Подтвердить почту" style="flex: 1;">
+                                            <span class="button-text">Подтвердить</span>
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <div class="password-group">
+                                <form id="passwordForm">
+                                    <div class="password-fields">
+                                        <div class="input-password">
+                                            <div class="password-background"></div>
+                                            <img class="input-icon" src="img/ImagePassword.png" alt="" />
+                                            <input
+                                                type="password"
+                                                class="password-input"
+                                                id="oldPassword"
+                                                placeholder="Введите старый пароль"
+                                                aria-label="Введите старый пароль"
+                                                required
+                                            />
+                                            <img class="line" src="img/line-2.png" alt="" />
+                                        </div>
+
+                                        <div class="input-password">
+                                            <div class="password-background"></div>
+                                            <img class="input-icon" src="img/ImagePassword.png" alt="" />
+                                            <input
+                                                type="password"
+                                                class="password-input"
+                                                id="newPassword"
+                                                placeholder="Введите новый пароль"
+                                                aria-label="Введите новый пароль"
+                                                required
+                                            />
+                                            <img class="line" src="img/line-2.png" alt="" />
+                                        </div>
+
+                                        <div class="input-password">
+                                            <div class="password-background"></div>
+                                            <img class="input-icon" src="img/ImagePassword.png" alt="" />
+                                            <input
+                                                type="password"
+                                                class="password-input"
+                                                id="confirmPassword"
+                                                placeholder="Подтвердите новый пароль"
+                                                aria-label="Подтвердите новый пароль"
+                                                required
+                                            />
+                                            <img class="line" src="img/line-2.png" alt="" />
+                                        </div>
+                                    </div>
+                                    
+                                    <button class="button button--secondary" type="submit" aria-label="Сменить пароль">
+                                        <span class="button-text">Сменить пароль</span>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <aside class="stats-card">
+                    <div class="stats-title">Статистика профиля</div>
+                    <div class="stats-grid">
+                        <div class="stat-chip">
+                            <div class="stat-label">С нами</div>
+                            <div class="stat-value" id="statDays">—</div>
+                        </div>
+                        <div class="stat-chip">
+                            <div class="stat-label">Последний вход</div>
+                            <div class="stat-value" id="statLastLogin">—</div>
+                        </div>
+                        <div class="stat-chip">
+                            <div class="stat-label">Email</div>
+                            <div class="stat-value" id="statEmailStatus">—</div>
+                        </div>
+                        <div class="stat-chip">
+                            <div class="stat-label">Статус</div>
+                            <div class="stat-value" id="statActive">—</div>
+                        </div>
+                    </div>
+                </aside>
+            </section>
+
+            <div class="footer-section">
+                <div class="footer-buttons">
+                    <button class="button button--secondary" type="button" aria-label="Отправить репорт" id="reportBtn">
+                        <span class="button-text">Отправить репорт</span>
+                    </button>
+                    
+                    <button class="button button--secondary" type="button" aria-label="Выйти из аккаунта" id="logoutBtn">
+                        <span class="button-text">Выйти</span>
+                    </button>
+                </div>
+                
+                <aside class="info-div" role="complementary" aria-label="Информация о пользователе">
+                    <div class="info-background"></div>
+                    <p class="info-text" id="infoDays">Вы уже — дней следите<br />за своими финансами</p>
+                </aside>
+            </div>
+        </div>
+        <div id="profileMessage" class="modal-success-message" style="display:none; margin: 20px;"></div>
+    </main>
+
+    <div class="modal-overlay" id="reportModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Отправить репорт</h2>
+                <button class="close-modal" id="closeReportModal" aria-label="Закрыть">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="reportMessage" class="modal-error-message" style="display:none;"></div>
+                <form id="reportForm">
+                    <div class="modal-form-group">
+                        <label for="reportTitle">Название репорта *</label>
+                        <input
+                            type="text"
+                            id="reportTitle"
+                            class="modal-form-control"
+                            placeholder="Краткое описание проблемы"
+                            required
+                            maxlength="255"
+                        />
+                    </div>
+                    <div class="modal-form-group">
+                        <label for="reportDescription">Описание</label>
+                        <textarea
+                            id="reportDescription"
+                            class="modal-form-control"
+                            rows="5"
+                            placeholder="Подробное описание проблемы или предложения..."
+                            style="resize: vertical; min-height: 100px;"
+                        ></textarea>
+                    </div>
+                    <button type="submit" class="modal-submit-btn">Отправить репорт</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="JS/Profile.js"></script>
+</body>
+</html>

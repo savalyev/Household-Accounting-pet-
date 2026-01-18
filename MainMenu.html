@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Финансовый дашборд</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="CSS/MainMenu.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link type="image/png" href="img/icon.png" rel="icon">
+</head>
+<body>
+    <main class="dashboard">
+        <div class="left-column">
+            <section class="dashboard__panel dashboard__panel--left" aria-label="История операций">
+                <div class="panel-header">
+                    <h2 class="panel-title"><i class="fas fa-history"></i> История операций</h2>
+                    <button class="filter-btn" id="filterToggle">
+                        <i class="fas fa-filter"></i>
+                    </button>
+                </div>
+                
+                <div class="filter-options" id="filterOptions">
+                    <div class="filter-group">
+                        <span class="filter-label">Тип:</span>
+                        <button class="filter-chip active" data-filter="all">Все</button>
+                        <button class="filter-chip" data-filter="expense">Расходы</button>
+                        <button class="filter-chip" data-filter="income">Доходы</button>
+                    </div>
+                    <div class="filter-group">
+                        <span class="filter-label">Период:</span>
+                        <button class="filter-chip" data-period="all">Все время</button>
+                        <button class="filter-chip active" data-period="month">Этот месяц</button>
+                        <button class="filter-chip" data-period="week">Эта неделя</button>
+                    </div>
+                </div>
+                
+                <div class="transactions-overlay" id="transactionsContainer">
+                    <div class="empty-state">
+                        <i class="fas fa-receipt"></i>
+                        <p>Операций пока нет</p>
+                        <small>Добавьте первую операцию</small>
+                    </div>
+                </div>
+                
+                <div class="transactions-summary">
+                    <div class="summary-item">
+                        <span>Всего операций:</span>
+                        <span id="totalTransactions">0</span>
+                    </div>
+                    <div class="summary-item">
+                        <span>Сумма:</span>
+                        <span id="transactionsSum">0 ₽</span>
+                    </div>
+                </div>
+            </section>
+            
+            <div class="buttons-container">
+                <button class="button button--primary button--expense" type="button" aria-label="Добавить расходы" id="add_primary">
+                    <i class="fas fa-minus-circle"></i>
+                    <span>Добавить расходы</span>
+                </button>
+                <button class="button button--primary button--income" type="button" aria-label="Добавить доходы" id="add_income">
+                    <i class="fas fa-plus-circle"></i>
+                    <span>Добавить доходы</span>
+                </button>
+                <button class="button button--secondary" type="button" aria-label="Сбросить статистику" id="resetStats">
+                    <i class="fas fa-redo"></i>
+                    <span>Сбросить статистику</span>
+                </button>
+            </div>
+        </div>
+
+        <section class="dashboard__panel dashboard__panel--main" aria-label="Аналитика финансов">
+            <div class="main-panel-header">
+                <h1 class="dashboard__title">
+                    <i class="fas fa-chart-pie"></i> Финансовый дашборд
+                </h1>
+                <div class="time-selector">
+                    <button class="time-btn active" data-period="month">Месяц</button>
+                    <button class="time-btn" data-period="quarter">Квартал</button>
+                    <button class="time-btn" data-period="year">Год</button>
+                </div>
+            </div>
+            
+            <div class="chart-container">
+                <div class="chart-area" aria-label="Диаграмма расходов по категориям">
+                    <canvas id="expenseChart"></canvas>
+                </div>
+                <div class="chart-legend" id="chartLegend"></div>
+            </div>
+            
+            <div class="quick-stats">
+                <div class="quick-stat">
+                    <div class="stat-icon">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <div class="stat-info">
+                        <span class="stat-label">Еда</span>
+                        <span class="stat-value" id="foodExpense">0 ₽</span>
+                    </div>
+                </div>
+                <div class="quick-stat">
+                    <div class="stat-icon">
+                        <i class="fas fa-car"></i>
+                    </div>
+                    <div class="stat-info">
+                        <span class="stat-label">Транспорт</span>
+                        <span class="stat-value" id="transportExpense">0 ₽</span>
+                    </div>
+                </div>
+                <div class="quick-stat">
+                    <div class="stat-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <div class="stat-info">
+                        <span class="stat-label">Жилье</span>
+                        <span class="stat-value" id="homeExpense">0 ₽</span>
+                    </div>
+                </div>
+                <div class="quick-stat">
+                    <div class="stat-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <div class="stat-info">
+                        <span class="stat-label">Покупки</span>
+                        <span class="stat-value" id="shoppingExpense">0 ₽</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="stats-container">
+            <article class="stats-card" aria-labelledby="income-title">
+                <div class="stats-card-header">
+                    <h2 class="stats-card__title" id="income-title">
+                        <i class="fas fa-arrow-up"></i> Доходы
+                    </h2>
+                    <div class="trend positive" id="incomeTrend">
+                        <i class="fas fa-arrow-up"></i> 0%
+                    </div>
+                </div>
+                <p class="stats-card__value" id="incomeValue">0 ₽</p>
+                <div class="stats-card__subtitle">
+                    <span>За месяц:</span>
+                    <span id="incomeMonth">0 ₽</span>
+                </div>
+            </article>
+
+            <article class="stats-card" aria-labelledby="expenses-title">
+                <div class="stats-card-header">
+                    <h2 class="stats-card__title" id="expenses-title">
+                        <i class="fas fa-arrow-down"></i> Расходы
+                    </h2>
+                    <div class="trend negative" id="expenseTrend">
+                        <i class="fas fa-arrow-down"></i> 0%
+                    </div>
+                </div>
+                <p class="stats-card__value" id="expensesValue">0 ₽</p>
+                <div class="stats-card__subtitle">
+                    <span>За месяц:</span>
+                    <span id="expensesMonth">0 ₽</span>
+                </div>
+            </article>
+
+            <article class="stats-card stats-card--total" aria-labelledby="total-title">
+                <div class="stats-card-header">
+                    <h2 class="stats-card__title" id="total-title">
+                        <i class="fas fa-wallet"></i> Баланс
+                    </h2>
+                    <div class="budget-indicator" id="budgetIndicator">
+                        <i class="fas fa-check-circle"></i> По плану
+                    </div>
+                </div>
+                <p class="stats-card__value stats-card__value--total" id="totalValue">0 ₽</p>
+                <div class="progress-container">
+                    <div class="progress-label">
+                        <span>Бюджет на месяц</span>
+                        <span id="budgetUsed">0%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="budgetProgress"></div>
+                    </div>
+                </div>
+            </article>
+        </div>
+
+        <aside class="dashboard__panel dashboard__panel--right" aria-label="Навигация и цели">
+            <nav class="navigation" aria-label="Основная навигация">
+                <button class="button button--secondary" type="button" aria-label="Перейти в профиль" id="toprofile">
+                    <i class="fas fa-user"></i>
+                    <span>Профиль</span>
+                </button>
+                <button class="button button--secondary" type="button" aria-label="Перейти в панель администратора" id="tostuffpunel">
+                    <i class="fas fa-cog"></i>
+                    <span>Админ-панель</span>
+                </button>
+            </nav>
+
+            <div class="goals-section">
+                <h3 class="goals-title">
+                    <i class="fas fa-bullseye"></i> Финансовые цели
+                </h3>
+                <div class="goals-list" id="goalsList"></div>
+                <button class="button button--secondary button--small" id="addGoal">
+                    <i class="fas fa-plus"></i>
+                    <span>Добавить цель</span>
+                </button>
+            </div>
+
+            <div class="insights-section">
+                <h3 class="insights-title">
+                    <i class="fas fa-lightbulb"></i> Инсайты
+                </h3>
+                <div class="insights-list" id="insightsList"></div>
+            </div>
+
+            <button class="button button--export" type="button" aria-label="Экспортировать данные" id="exportBtn">
+                <i class="fas fa-file-export"></i>
+                <span>Экспортировать отчет</span>
+            </button>
+        </aside>
+    </main>
+
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal modal-transaction" id="transactionModal">
+            <div class="modal-header">
+                <h3 class="modal-title">Добавить операцию</h3>
+                <button class="modal-close" id="modalClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="transaction-type-selector">
+                    <button class="type-option active" data-type="expense">
+                        <i class="fas fa-minus-circle"></i>
+                        <span style="color:white">Расход</span>
+                    </button>
+                    <button class="type-option" data-type="income">
+                        <i class="fas fa-plus-circle"></i>
+                        <span style="color: white">Доход</span>
+                    </button>
+                </div>
+                
+                <div class="form-group">
+                    <label for="amountInput">Сумма</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-ruble-sign"></i>
+                        <input type="number" id="amountInput" placeholder="0" min="0" step="0.01">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="categorySelect">Категория</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-tag"></i>
+                        <select id="categorySelect">
+                            <option value="" disabled selected>Загрузка категорий...</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="descriptionInput">Описание</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-comment"></i>
+                        <input type="text" id="descriptionInput" placeholder="Краткое описание операции">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="dateInput">Дата</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-calendar"></i>
+                        <input type="date" id="dateInput" value="">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="button button--secondary" id="cancelTransaction">Отмена</button>
+                <button class="button button--secondary" id="saveTransaction">Сохранить</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="goalModalOverlay">
+        <div class="modal modal-goal" id="goalModal">
+            <div class="modal-header">
+                <h3 class="modal-title">Новая финансовая цель</h3>
+                <button class="modal-close" id="goalModalClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="goalTitle">Название цели</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-bullseye"></i>
+                        <input type="text" id="goalTitle" placeholder="Например: Подушка безопасности">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="goalTarget">Целевая сумма</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-ruble-sign"></i>
+                        <input type="number" id="goalTarget" placeholder="0" min="0" step="0.01">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="goalCurrent">Уже накоплено</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-wallet"></i>
+                        <input type="number" id="goalCurrent" placeholder="0" min="0" step="0.01">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="goalDeadline">Дедлайн</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-calendar"></i>
+                        <input type="date" id="goalDeadline" min="">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="button button--secondary" id="goalCancel">Отмена</button>
+                <button class="button button--primary" id="goalSave">Сохранить цель</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="JS/MainMenu.js"></script>
+</body>
+</html>

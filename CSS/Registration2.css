@@ -1,0 +1,23 @@
+@import url('./Authorization2.css');
+
+/* Дополнительные правки для страницы регистрации */
+.form-title {
+    margin-bottom: var(--spacing-sm);
+}
+
+.form-footer {
+    margin-top: var(--spacing-lg);
+}
+
+.password-wrapper .toggle-password {
+    font-size: var(--font-size-lg);
+}
+
+@media (max-width: 768px) {
+    .form-section {
+        padding-bottom: var(--spacing-xl);
+    }
+}
+
+
+

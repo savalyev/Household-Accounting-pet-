@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация</title>
+    <link rel="stylesheet" href="CSS/globals.css">
+    <link rel="stylesheet" href="CSS/Registration.css">
+    <link type="image/png" href="img/icon.png" rel="icon">
+</head>
+<body>
+    <div id="notificationContainer"></div>
+    <main class="screen">
+        <section class="main-block">
+            <div class="view" role="presentation"></div>
+            <img class="image" src="img/img1.png" alt="Иллюстрация регистрации">
+            <h1 class="text-wrapper">Регистрация</h1>
+            <form class="registration-form" id="registerForm" action="/register" method="post" novalidate>
+                <div class="input-group">
+                    <label for="name" class="visually-hidden">Имя</label>
+                    <input type="text"
+                    id="name"
+                    name="name"
+                    class="rectangle"
+                    placeholder="Имя"
+                    required
+                    autocomplete="name"
+                    aria-required="true">
+                    <img class="input-icon" src="img/ImageName.png" alt="" role="presentation" aria-hidden="true">
+                </div>
+                <div class="input-group">
+                    <label for="email" class="visually-hidden">Почта</label>
+                    <input type="email"
+                    id="email"
+                    name="email"
+                    class="rectangle"
+                    placeholder="Почта"
+                    required
+                    autocomplete="email"
+                    aria-required="true">
+                    <img class="input-icon" src="img/ImageEmail.png" alt="" role="presentation" aria-hidden="true">
+                </div>
+                <div class="input-group">
+                    <label for="password" class="visually-hidden">Введите пароль</label>
+                    <input type="password"
+                    id="password"
+                    name="password"
+                    class="rectangle"
+                    placeholder="Введите пароль"
+                    required
+                    autocomplete="new-password"
+                    aria-required="true">
+                    <img class="input-icon" src="img/ImagePassword.png" alt="" role="presentation" aria-hidden="true">
+                </div>
+                <div class="input-group">
+                    <label for="confirm-password" class="visually-hidden">Подтвердите пароль</label>
+                    <input type="password"
+                    id="confirm-password"
+                    name="confirm-password"
+                    class="rectangle"
+                    placeholder="Подтвердите пароль"
+                    required
+                    autocomplete="new-password"
+                    aria-required="true">
+                    <img class="input-icon" src="img/ImagePassword.png" alt="" role="presentation" aria-hidden="true">
+                </div>
+                <button class="button" type="submit" id="tomainmenu">
+                    <span class="text-wrapper-2">Создать аккаунт</span>
+                </button>
+            </form>
+            <p class="login-link">
+                <span class="span">Уже есть аккаунт? </span>
+                <a href="Authorization2.html" class="text-wrapper-3">Войти</a>
+            </p>
+        </section>
+    </main>
+    <script src="JS/app.js"></script>
+</body>
+</html>

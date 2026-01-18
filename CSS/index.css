@@ -1,0 +1,554 @@
+.screen {
+  background: linear-gradient(61deg, rgba(5, 10, 13, 0.29) 53%, rgba(27, 65, 117, 0.29) 100%),
+  linear-gradient(270deg, rgba(0,0,0,0) 0%, rgba(0, 0, 0, 0.2) 100%),
+  linear-gradient(180deg, rgba(1, 88, 159, 1) 0%, rgba(0,0,0,1) 59%);
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.header {
+  margin-bottom: 60px;
+}
+
+.logo {
+  width: 100%;
+  max-width: 414px;
+  height: auto;
+  display: flex;
+  justify-content: flex-start;
+  margin-left: 80px;
+  animation: startPage 2s ease-out;
+}
+
+.img:hover{
+  animation: continuousSpin 2s infinite;
+}
+
+.vector:hover{
+  animation: continuousSpin 2s infinite;
+}
+
+.vector-2:hover{
+  animation: continuousSpin 2s infinite;
+}
+
+        @keyframes continuousSpin {
+            from{
+                transform: rotate(0deg) scale(1);
+            }
+            to{
+                transform: rotate(360deg) scale(1.1);
+
+            }
+        }
+
+.view {
+  position: relative;
+  width: 100%;
+  height: 172px;
+  display: flex;
+  align-items: flex-start;
+}
+
+.vector, .img, .vector-2 {
+  position: absolute;
+}
+
+.vector {
+  top: 84px;
+  left: -3px;
+  width: 78px;
+  height: 74px;
+}
+
+.img {
+  top: 80px;
+  left: 83px;
+  width: 80px;
+  height: 83px;
+}
+
+.vector-2 {
+  top: 0;
+  left: 30px;
+  width: 78px;
+  height: 87px;
+}
+
+.text-wrapper, .div {
+  font-family: 'Comfortaa', 'Comfortaa-Regular', Helvetica, Arial, sans-serif;
+  font-weight: 400;
+  color: #ffffff;
+  font-size: clamp(32px, 5vw, 48px);
+  line-height: 1.2;
+  white-space: nowrap;
+  position: absolute;
+}
+
+.text-wrapper {
+  top: 81px;
+  left: 190px;
+  letter-spacing: -1.44px;
+}
+
+.div {
+  top: 22px;
+  left: 190px;
+  letter-spacing: 1.44px;
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 2;
+  margin-left: 80px;
+    animation: startPage 2s ease-out;
+}
+
+.features {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
+
+.feature-tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 26px;
+  background-color: #181724;
+  border-radius: 24px;
+  font-family: 'Arial', sans-serif;
+  font-weight: 400;
+  color: #817ffb;
+  font-size: clamp(18px, 2vw, 24px);
+  letter-spacing: -0.72px;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.main-title {
+  font-family: 'Arial', sans-serif;
+  font-weight: 400;
+  color: #ffffff;
+  font-size: clamp(32px, 6vw, 70px);
+  letter-spacing: -2.1px;
+  line-height: 1.2;
+  margin-bottom: 30px;
+  max-width: 800px;
+}
+
+.description {
+  font-family: 'Arial', sans-serif;
+  font-weight: 400;
+  color: #c2c2c2;
+  font-size: clamp(16px, 2vw, 20px);
+  letter-spacing: -0.6px;
+  line-height: 1.5;
+  margin-bottom: 50px;
+  max-width: 600px;
+}
+
+.auth-buttons {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 60px;
+  flex-wrap: wrap;
+}
+
+.button-register {
+  width: 186px;
+  height: 59px;
+  background-color: #ffffff;
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button-register:hover {
+  background-color: #f0f0f0;
+  transform: translateY(-2px);
+}
+
+.button-text {
+  color: #000000;
+  font-size: clamp(18px, 2vw, 24px);
+  letter-spacing: -0.72px;
+  font-family: 'Arial', sans-serif;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.button-login {
+  background: none;
+  border: none;
+  font-family: 'Arial', sans-serif;
+  font-weight: 400;
+  color: #ffffff;
+  font-size: clamp(18px, 2vw, 24px);
+  letter-spacing: -0.72px;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.button-login:hover {
+  opacity: 0.8;
+}
+
+.transactions-overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 60%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.transaction-card {
+  position: absolute;
+  width: 537px;
+  height: 203px;
+  pointer-events: auto;
+  z-index: 2;
+}
+
+.card-1 {
+  top: 48px;
+  right: 65px;
+  z-index: 3;
+}
+
+.card-2 {
+  top: 133px;
+  right: 170px;
+  z-index: 2;
+}
+
+.card-3 {
+  top: 217px;
+  right: 276px;
+  z-index: 1;
+}
+
+.card-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #181818;
+  border-radius: 45px;
+  z-index: 1;
+}
+
+.card-background::after {
+  content: '';
+  position: absolute;
+  top: 77px;
+  left: 15px;
+  width: calc(100% - 30px);
+  height: 110px;
+  background-color: #000000;
+  border-radius: 31px;
+}
+
+.card-content {
+  position: relative;
+  z-index: 2;
+  padding: 29px 31px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.transaction-type {
+  color: #ffffff;
+  font-size: clamp(16px, 2vw, 20px);
+  letter-spacing: -0.6px;
+  font-family: 'Arial', sans-serif;
+  font-weight: 400;
+  line-height: 1;
+  margin-bottom: auto;
+}
+
+.transaction-details {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.currency-icon {
+  width: 81px;
+  height: 81px;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+.amount-section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-left: auto;
+}
+
+.amount {
+  color: #ffffff;
+  font-size: clamp(24px, 3vw, 36px);
+  letter-spacing: -1.08px;
+  font-family: 'Arial', sans-serif;
+  font-weight: 400;
+  line-height: 1;
+  margin-bottom: 5px;
+}
+
+.currency {
+  font-family: 'Arial', sans-serif;
+  font-weight: 400;
+  color: #5d5d5d;
+  font-size: 14px;
+  letter-spacing: -0.42px;
+  line-height: 1;
+}
+
+@media (max-width: 1440px) {
+  .transaction-card {
+    width: 450px;
+    height: 170px;
+  }
+  
+  .card-1 {
+    top: 300px;
+    right: 30px;
+  }
+  
+  .card-2 {
+    top: 370px;
+    right: 120px;
+  }
+  
+  .card-3 {
+    top: 440px;
+    right: 210px;
+  }
+  
+  .card-background::after {
+    top: 60px;
+    height: 90px;
+  }
+  
+  .currency-icon {
+    width: 65px;
+    height: 65px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .transactions-overlay {
+    width: 50%;
+  }
+  
+  .transaction-card {
+    width: 380px;
+    height: 150px;
+  }
+  
+  .card-1 {
+    top: 280px;
+    right: 20px;
+  }
+  
+  .card-2 {
+    top: 340px;
+    right: 90px;
+  }
+  
+  .card-3 {
+    top: 400px;
+    right: 160px;
+  }
+  
+  .card-content {
+    padding: 20px 25px;
+  }
+  
+  .currency-icon {
+    width: 55px;
+    height: 55px;
+  }
+}
+
+@media (max-width: 768px) {
+  .screen {
+    padding: 20px 15px;
+  }
+  
+  .header {
+    margin-bottom: 40px;
+  }
+  
+  .view {
+    height: 120px;
+  }
+  
+  .vector {
+    width: 50px;
+    height: 47px;
+    top: 56px;
+    left: -2px;
+  }
+  
+  .img {
+    width: 51px;
+    height: 53px;
+    top: 53px;
+    left: 53px;
+  }
+  
+  .vector-2 {
+    width: 50px;
+    height: 56px;
+    top: 0;
+    left: 19px;
+  }
+  
+  .text-wrapper, .div {
+    font-size: 24px;
+    left: 120px;
+  }
+  
+  .text-wrapper {
+    top: 54px;
+  }
+  
+  .div {
+    top: 14px;
+  }
+  
+  .features {
+    justify-content: center;
+    margin-bottom: 30px;
+  }
+  
+  .main-title {
+    text-align: center;
+  }
+  
+  .description {
+    text-align: center;
+  }
+  
+  .auth-buttons {
+    justify-content: center;
+  }
+  
+  .transactions-overlay {
+    position: relative;
+    width: 100%;
+    height: auto;
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .transaction-card {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    height: 150px;
+    top: auto !important;
+    right: auto !important;
+    left: auto !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .transaction-card {
+    height: 130px;
+    max-width: 350px;
+  }
+  
+  .card-background::after {
+    top: 50px;
+    height: 65px;
+  }
+  
+  .card-content {
+    padding: 15px 20px;
+  }
+  
+  .currency-icon {
+    width: 45px;
+    height: 45px;
+  }
+  
+  .amount {
+    font-size: 24px;
+  }
+}
+
+@keyframes startPage {
+    from{
+        transform: translateY(100px);
+        opacity: 0;
+    }
+    to{
+        transform: translateY(0px);
+        opacity: 1;
+    }
+    
+}
+
+.feature-tag:hover{
+  transform: scale(1.2);
+  animation: pulse 2s infinite;
+}
+
+        @keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(102, 126, 234, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 30px rgba(102, 126, 234, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(102, 126, 234, 0);
+  }
+}
+
+.transaction-card:hover{
+  transform: scale(1.1);
+}
+
+.backgroundCards {
+  position: absolute;
+  z-index: 1;
+  top: -290px;
+  left: 670px;
+  opacity: 0.5;
+}
+
+.transactions-container {
+  position: relative;
+  top: -500px;
+  width: 100%;
+  height: 500px;
+  margin-top: 40px;
+}

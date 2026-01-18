@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Авторизация</title>
+    <link rel="stylesheet" href="CSS\globals.css">
+    <link rel="stylesheet" href="CSS\Authorization.css">
+    <link type="image/png" href="img/icon.png" rel="icon">
+</head>
+<body>
+    <div id="notificationContainer"></div>
+    <main class="screen">
+        <section class="main-block">
+            <div class="view" role="presentation"></div>
+            <img class="image" src="img/img1.png" alt="Иллюстрация авторизации">
+            <h1 class="text-wrapper">Авторизация</h1>
+            <form class="login-form" id="authForm" method="post" novalidate>
+                <div class="input-group">
+                    <label for="email" class="visually-hidden">Email</label>
+                    <input type="email"
+                    id="email"
+                    name="email"
+                    class="rectangle"
+                    placeholder="Email"
+                    required
+                    autocomplete="email"
+                    aria-required="true">
+                    <img class="input-icon" src="img/ImageEmail.png" alt="" role="presentation" aria-hidden="true">
+                </div>
+                <div class="input-group">
+                    <label for="password" class="visually-hidden">Password</label>
+                    <input type="password"
+                    id="password"
+                    name="password"
+                    class="rectangle"
+                    placeholder="Password"
+                    required
+                    autocomplete="current-password"
+                    aria-required="true">
+                    <img class="input-icon" src="img/ImagePassword.png" alt="" role="presentation" aria-hidden="true">
+                </div>
+                <button class="button" type="submit">
+                    <span class="text-wrapper-2">Вход</span>
+                </button>
+            </form>
+            <p class="forgot-password">
+                <span class="span">Забыли </span>
+                <a href="/forgot-password" class="text-wrapper-3">логин или пароль?</a>
+            </p>
+            <a href="Registration2.html" class="button-create">Создать аккаунт →</a>
+        </section>
+    </main>
+    <script src="JS/app.js"></script>
+</body>
+</html>

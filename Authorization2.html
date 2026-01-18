@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Авторизация | Вход в аккаунт</title>
+    <meta name="description" content="Страница авторизации. Войдите в свой аккаунт.">
+    <link rel="stylesheet" href="CSS/globals.css">
+    <link rel="stylesheet" href="CSS/Authorization2.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link type="image/png" href="img/icon.png" rel="icon">
+</head>
+<body class="page-enter">
+    <main class="screen">
+        <div class="container">
+            <div class="main-block">
+                <div class="image-section" aria-hidden="true">
+                    <img 
+                        class="image" 
+                        src="img/image-24.png" 
+                        alt="Декоративное изображение для страницы авторизации"
+                        loading="lazy"
+                        width="641"
+                        height="742">
+                </div>
+
+                <div class="form-section">
+                    <header class="form-header">
+                        <h1 class="form-title">Вход в аккаунт</h1>
+                        <div class="divider" role="separator"></div>
+                    </header>
+
+                    <form id="authForm" class="login-form" method="post" novalidate>
+                        <input type="hidden" name="_csrf" value="">
+
+                        <div class="form-group">
+                            <label for="email" class="form-label">
+                                Электронная почта <span class="required">*</span>
+                            </label>
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                class="form-input"
+                                required
+                                aria-required="true"
+                                autocomplete="email"
+                                placeholder="example@email.com"
+                                aria-describedby="email-hint">
+                            <div id="email-hint" class="form-hint" hidden>Введите вашу электронную почту</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password" class="form-label">
+                                Пароль <span class="required">*</span>
+                            </label>
+                            <div class="password-wrapper">
+                                <input 
+                                    type="password"
+                                    id="password"
+                                    name="password"
+                                    class="form-input"
+                                    required
+                                    aria-required="true"
+                                    autocomplete="current-password"
+                                    placeholder="Введите пароль"
+                                    aria-describedby="password-hint">
+                                <button type="button" class="toggle-password" aria-label="Показать пароль" aria-pressed="false">
+                                    👁
+                                </button>
+                            </div>
+                            <div id="password-hint" class="form-hint" hidden>Введите ваш пароль</div>
+                        </div>
+
+                        <div class="error-message" role="alert" aria-live="polite" hidden></div>
+
+                        <button type="submit" class="submit-button" aria-label="Войти в аккаунт">
+                            <span class="button-text">Вход</span>
+                        </button>
+
+                        <div class="form-footer">
+                            <a href="Registration2.html" class="register-link">
+                                <span>Создать аккаунт</span>
+                                <span class="arrow" aria-hidden="true">→</span>
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+                <script type="module" src="JS/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Диаграмма расходов</title>
+    <link rel="stylesheet" href="CSS/MainMenu.css">
+    <link rel="stylesheet" href="CSS/modal.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <main class="dashboard">
+        <div class="left-column">
+            <section class="dashboard__panel dashboard__panel--left" aria-label="Панель управления" id="panel_content">
+                <div class="transactions-overlay" id="transactionsContainer">
+                </div>
+            </section>
+            
+            <div class="buttons-container">
+                <button class="button button--primary" type="button" aria-label="Добавить расходы" id="add_primary">
+                    Добавить расходы
+                </button>
+                <button class="button button--primary" type="button" aria-label="Добавить доходы" id="add_income">
+                    Добавить доходы
+                </button>
+                <button class="button button--primary" type="button" aria-label="Сбросить статистику">
+                    Сбросить статистику
+                </button>
+            </div>
+        </div>
+
+        <section class="dashboard__panel dashboard__panel--main" aria-label="Основная панель диаграммы">
+            <h1 class="dashboard__title">Диаграмма расходов</h1>
+            <div class="chart-area" aria-label="Область для отображения диаграммы">
+                <canvas id="expenseChart"></canvas>
+            </div>
+        </section>
+
+        <div class="stats-container">
+            <article class="stats-card" aria-labelledby="income-title">
+                <h2 class="stats-card__title" id="income-title">Доходы</h2>
+                <p class="stats-card__value" id="incomeValue">0</p>
+            </article>
+
+            <article class="stats-card" aria-labelledby="expenses-title">
+                <h2 class="stats-card__title" id="expenses-title">Расходы</h2>
+                <p class="stats-card__value" id="expensesValue">0</p>
+            </article>
+
+            <article class="stats-card" aria-labelledby="total-title">
+                <h2 class="stats-card__title" id="total-title">Итоговая сумма</h2>
+                <p class="stats-card__value stats-card__value--total" id="totalValue">0</p>
+            </article>
+        </div>
+
+        <aside class="dashboard__panel dashboard__panel--right" aria-label="Панель навигации и статистики">
+            <nav class="navigation" aria-label="Основная навигация">
+                <button class="button button--secondary" type="button" aria-label="Перейти в профиль" id="toprofile">
+                    Профиль
+                </button>
+                <button class="button button--secondary" type="button" aria-label="Перейти в панель администратора" id="tostuffpunel">
+                    Панель администратора
+                </button>
+            </nav>
+
+            <button class="button button--export" type="button" aria-label="Экспортировать данные">
+                Экспортировать
+            </button>
+        </aside>
+    </main>
+    <script src="JS/MainMenu.js"></script>
+</body>
+</html>
