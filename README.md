@@ -27,8 +27,8 @@ createdb -U postgres your_db_name, createuser -U postgres your_user.
 psql -U your_user -d your_db_name -f init.sql.
 
 ## Запуск
-npm run dev          # Frontend:3001
-cd backend && node server.js  # Backend:3000
+npm run dev
+cd backend && node server.js
 
 ## Вклад в проект
 Форкните репозиторий, создайте ветку с новой фичей и отправьте Pull Request. Добро пожаловать предложения и issues!
